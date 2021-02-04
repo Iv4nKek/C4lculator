@@ -1,7 +1,7 @@
 package com.example.myapplication.Elements;
 
 public abstract class Element {
-    private String text;
+    protected String text;
 
     public Element(String text) {
         this.text = text;

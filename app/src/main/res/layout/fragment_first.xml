@@ -294,9 +294,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
+                android:onClick="dot"
                 android:layout_weight=".1"
                 android:rotationX="0"
-                android:text="\?" />
+                android:text="."
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/eval"

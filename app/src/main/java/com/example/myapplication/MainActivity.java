@@ -1,6 +1,16 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+
+import com.example.myapplication.Elements.Element;
+import com.example.myapplication.Elements.ElementsContainer;
+import com.example.myapplication.Elements.LeftBracket;
+import com.example.myapplication.Elements.NumberElement;
+import com.example.myapplication.Elements.OperationElement;
+import com.example.myapplication.Elements.PointElement;
+import com.example.myapplication.Elements.RightBracket;
+import com.example.myapplication.Elements.TextOperationElement;
+import com.example.myapplication.Elements.action;
 import com.google.android.material.*;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -19,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
     private Calculator _calculator;
     private TextView _textView;
+    private ElementsContainer _container;
     private String _text ="";
     private boolean error = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        _container = new ElementsContainer();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,6 +91,18 @@ public class MainActivity extends AppCompatActivity {
         _text += toAdd;
         _textView.setText(_text);
     }
+    private action AddElement(Element toAdd)
+    {
+        if(error)
+        {
+            clear();
+            error = false;
+        }
+        action act = _container.handleElement(toAdd);
+        _textView.setText(_container.toString());
+        System.out.println(_container.toString());
+        return act;
+    }
 
     private void setText(String text)
     {
@@ -88,42 +112,43 @@ public class MainActivity extends AppCompatActivity {
 
     public void sum(View view)
     {
-        addText("+");
+        AddElement(new OperationElement("+"));
     }
     public void sub(View view)
     {
-        addText("-");
+        AddElement(new OperationElement("-"));
     }
     public void multiply(View view)
     {
-        addText("*");
+        AddElement(new OperationElement("*"));
     }
     public void division(View view)
     {
-        addText("/");
+        AddElement(new OperationElement("/"));
     }
     public void backSpace(View view)
     {
-        if(_text.length()>0)
-        {
-            setText(_text.substring(0, _text.length() - 1));
-        }
+        _container.deleteLat();
+        _textView.setText(_container.toString());
     }
     public void rightBracket(View view)
     {
-        addText(")");
+        AddElement(new RightBracket(")"));
     }
     public void leftBracket(View view)
     {
-        addText("(");
+        AddElement(new LeftBracket("("));
     }
     public void cos(View view)
     {
-        addText("cos(");
+        if(AddElement(new TextOperationElement("cos"))==action.add)
+            AddElement(new LeftBracket("("));
+
     }
     public void sin(View view)
     {
-        addText("sin(");
+        if(AddElement(new TextOperationElement("sin"))==action.add)
+            AddElement(new LeftBracket("("));
     }
     public void mSum(View view)
     {
@@ -141,53 +166,57 @@ public class MainActivity extends AppCompatActivity {
             _calculator.addToMemory(-result);
         }
     }
+    public void dot(View view)
+    {
+        AddElement(new PointElement("."));
+    }
     public void mR(View view)
     {
         addText(String.valueOf(_calculator.getMemory()));
     }
     public void zero(View view)
     {
-        addText("0");
+        AddElement(new NumberElement("0"));
     }
     public void one(View view)
     {
-        addText("1");
+        AddElement(new NumberElement("1"));
     }
     public void two(View view)
     {
-        addText("2");
+        AddElement(new NumberElement("2"));
     }
     public void three(View view)
     {
-        addText("3");
+        AddElement(new NumberElement("3"));
     }
     public void four(View view)
     {
-        addText("4");
+        AddElement(new NumberElement("4"));
     }
     public void five(View view)
     {
-        addText("5");
+        AddElement(new NumberElement("5"));
     }
     public void six(View view)
     {
-        addText("6");
+        AddElement(new NumberElement("6"));
     }
     public void seven(View view)
     {
-        addText("7");
+        AddElement(new NumberElement("7"));
     }
     public void eight(View view)
     {
-        addText("8");
+        AddElement(new NumberElement("8"));
     }
     public void nine(View view)
     {
-        addText("9");
+        AddElement(new NumberElement("9"));
     }
     public void eval(View view)
     {
-        double result = _calculator.evaluate(_text);
+        double result = _calculator.evaluate(_container.toString());
         if(!Double.isNaN(result))
         {
             setText(String.valueOf(result));

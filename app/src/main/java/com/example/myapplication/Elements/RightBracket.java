@@ -1,6 +1,11 @@
 package com.example.myapplication.Elements;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class RightBracket extends BracketElement {
+    ArrayList<Class<?>> available  = new ArrayList <>(Arrays.asList(NumberElement.class, RightBracket.class));
+    ArrayList<Class<?>> change  = new ArrayList <>(Arrays.asList());
     public RightBracket(String text) {
         super(text);
     }
@@ -9,9 +14,17 @@ public class RightBracket extends BracketElement {
     protected action GetAction(ElementsContainer source) {
         int bracketSum = getBracketSum(source);
         Element last = source.getLast();
-        if(last != null && bracketSum<0  &&last.getClass() ==  NumberElement.class && last.getClass() == RightBracket.class )
-            return action.add;
-        else
-            return action.ignore;
+        if(last != null  )
+        {
+            if(available.contains(last.getClass()) && bracketSum <0)
+                return action.add;
+            else if (change.contains(last.getClass()))
+                return action.change;
+            else
+            {
+                return action.ignore;
+            }
+        }
+        return action.add;
     }
 }

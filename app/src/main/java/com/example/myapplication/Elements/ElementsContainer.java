@@ -14,19 +14,32 @@ public class ElementsContainer {
         }
         return result;
     }
+    public void deleteLat()
+    {
+        if(elements != null && elements.size()!=0)
+        {
+            elements.remove(elements.size()-1);
+        }
+    }
     public Element  getLast()
     {
         if(elements.size()==0)
             return null;
         return elements.get(elements.size() -1);
     }
-    public void handleElement(Element element)
+    public void clear()
+    {
+        elements.clear();
+    }
+    public action handleElement(Element element)
     {
         action toDo = element.GetAction(this);
+        System.out.println(toDo);
         if(toDo == action.add)
             addElement(element);
         else if(toDo == action.change)
             changeLastElement(element);
+        return toDo;
 
 
     }
@@ -34,6 +47,7 @@ public class ElementsContainer {
     {
         elements.add(element);
     }
+
     private void changeLastElement(Element element)
     {
         elements.remove(elements.size()-1);
