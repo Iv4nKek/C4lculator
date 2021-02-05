@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.myapplication.Elements.Element;
 import com.example.myapplication.Elements.ElementsContainer;
+import com.example.myapplication.Elements.ErrorElement;
 import com.example.myapplication.Elements.LeftBracket;
 import com.example.myapplication.Elements.NumberElement;
 import com.example.myapplication.Elements.OperationElement;
@@ -37,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         _container = new ElementsContainer();
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         _textView = findViewById(R.id.textView);
-       // System.out.println(_textView);
         _calculator = new Calculator();
 
     }
@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             clear();
             error = false;
         }
-
         _text += toAdd;
         _textView.setText(_text);
     }
@@ -172,7 +171,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void mR(View view)
     {
-        addText(String.valueOf(_calculator.getMemory()));
+        if(_container.getLast().getClass()!= NumberElement.class)
+            AddElement(new NumberElement(String.valueOf(_calculator.getMemory())));
     }
     public void zero(View view)
     {
@@ -216,16 +216,37 @@ public class MainActivity extends AppCompatActivity {
     }
     public void eval(View view)
     {
+
         double result = _calculator.evaluate(_container.toString());
+        _container.clear();
         if(!Double.isNaN(result))
         {
-            setText(String.valueOf(result));
+            String toAdd = String.valueOf(result);
+            for(char symbol : toAdd.toCharArray())
+            {
+                if(symbol == '.')
+                {
+                    AddElement(new PointElement((String.valueOf(symbol))));
+                }
+                else
+                {
+                    AddElement(new NumberElement((String.valueOf(symbol))));
+                }
+
+            }
+
         }
         else
         {
-            setText("nope");
+            AddElement(new ErrorElement("error"));
+
             error = true;
         }
+    }
+    public void rickAstley()
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO"));
+        startActivity(browserIntent);
     }
 
 

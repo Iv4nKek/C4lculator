@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:background="#0f1c33"
     tools:context=".FirstFragment">
 
 
@@ -23,16 +26,17 @@
 
             <Button
                 android:id="@+id/sum"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
                 android:onClick="sum"
-                android:rotationX="0"
                 android:text="+" />
 
             <Button
                 android:id="@+id/sub"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -42,7 +46,7 @@
 
             <Button
                 android:id="@+id/div"
-                style="@style/Widget.AppCompat.Button"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -54,13 +58,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp">
+                android:layout_weight=".1">
 
                 <ImageView
                     android:id="@+id/imageView"
+                    style="@style/GreenText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/purple_500"
                     android:src="@android:drawable/ic_input_delete" />
 
@@ -68,20 +73,21 @@
                     android:id="@+id/backspace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginBottom="0dp"
                     android:layout_weight=".1"
-                    android:alpha="0"
                     android:background="#FFFFFF"
                     android:onClick="backSpace"
-                    android:rotationX="0"
                     android:shadowColor="#00FFFFFF"
-                    android:text="+"
-                    app:backgroundTint="#00FFFFFF" />
+                    android:text=""
+                    app:backgroundTint="#00FFFFFF"
+                    app:elevation="0dp"
+                    app:iconTint="#002B2020"
+                    app:rippleColor="#00FFFFFF" />
 
 
             </RelativeLayout>
@@ -94,24 +100,27 @@
 
             <Button
                 android:id="@+id/mul"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
                 android:onClick="multiply"
-                android:rotationX="0"
                 android:text="*" />
 
             <Button
                 android:id="@+id/msum"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
                 android:onClick="mSum"
                 android:rotationX="0"
-                android:text="M+" />
+                android:text="M"
+                app:backgroundTint="#060E39" />
 
             <Button
                 android:id="@+id/msub"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -121,6 +130,7 @@
 
             <Button
                 android:id="@+id/mr"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -137,6 +147,7 @@
 
             <Button
                 android:id="@+id/sin"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -146,15 +157,18 @@
 
             <Button
                 android:id="@+id/cos"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
                 android:onClick="cos"
                 android:rotationX="0"
-                android:text="cos" />
+                android:text="c
+" />
 
             <Button
                 android:id="@+id/leftBracket"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -164,6 +178,7 @@
 
             <Button
                 android:id="@+id/rightBracket"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -181,6 +196,7 @@
 
             <Button
                 android:id="@+id/b7"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -191,6 +207,7 @@
 
             <Button
                 android:id="@+id/b8"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -201,6 +218,7 @@
 
             <Button
                 android:id="@+id/b9"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -216,6 +234,7 @@
 
             <Button
                 android:id="@+id/b4"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -226,6 +245,7 @@
 
             <Button
                 android:id="@+id/b5"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -235,6 +255,7 @@
 
             <Button
                 android:id="@+id/b6"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -249,6 +270,7 @@
 
             <Button
                 android:id="@+id/b1"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -258,6 +280,7 @@
 
             <Button
                 android:id="@+id/b2"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -267,6 +290,7 @@
 
             <Button
                 android:id="@+id/b3"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -281,6 +305,7 @@
 
             <Button
                 android:id="@+id/b0"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
@@ -291,17 +316,19 @@
 
             <Button
                 android:id="@+id/kekW"
+                style="@style/GreenText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
-                android:onClick="dot"
                 android:layout_weight=".1"
+                android:onClick="dot"
                 android:rotationX="0"
                 android:text="."
                 android:textSize="14sp" />
 
             <Button
                 android:id="@+id/eval"
+                style="@style/GreenText"
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight=".1"
@@ -315,9 +342,12 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center|right"
-        android:text=""
-        android:textSize="36sp"
+        android:layout_marginBottom="10dp"
+        android:background="#00B81A1A"
+        android:gravity="bottom|right"
+        android:text="vgdasdas"
+        android:textColor="#d3def2"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:autoSizeTextType="none"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"

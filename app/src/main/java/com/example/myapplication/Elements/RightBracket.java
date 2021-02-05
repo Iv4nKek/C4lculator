@@ -25,6 +25,6 @@ public class RightBracket extends BracketElement {
                 return action.ignore;
             }
         }
-        return action.add;
+        return action.ignore;
     }
 }

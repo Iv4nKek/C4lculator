@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class LeftBracket extends BracketElement {
     ArrayList<Class<?>> available  = new ArrayList <>(Arrays.asList(OperationElement.class, LeftBracket.class, TextOperationElement.class));
-    ArrayList<Class<?>> change  = new ArrayList <>(Arrays.asList());
+    ArrayList<Class<?>> change  = new ArrayList <>(Arrays.asList(ErrorElement.class));
     public LeftBracket(String text) {
         super(text);
     }

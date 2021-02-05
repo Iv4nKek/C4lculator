@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ElementsContainer {
     ArrayList<Element> elements = new ArrayList<>();
-
+    private boolean _dotAvailable = true;
     @Override
     public String toString() {
         String result = "";
@@ -13,6 +13,26 @@ public class ElementsContainer {
             result += element.getText();
         }
         return result;
+    }
+    public boolean isDotAvailble()
+    {
+
+        for (int i = elements.size()-1;i>=0;i--)
+        {
+            Element element = elements.get(i);
+            if(element.getClass() == NumberElement.class)
+                continue;
+            else if(element.getClass() == PointElement.class)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        return true;
     }
     public void deleteLat()
     {
@@ -50,8 +70,19 @@ public class ElementsContainer {
 
     private void changeLastElement(Element element)
     {
+        if(elements.size() == 0)
+        {
+            addElement(element);
+        }
         elements.remove(elements.size()-1);
         addElement(element);
     }
 
+    public boolean is_dotAvailable() {
+        return _dotAvailable;
+    }
+
+    public void set_dotAvailable(boolean _dotAvailable) {
+        this._dotAvailable = _dotAvailable;
+    }
 }

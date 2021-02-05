@@ -16,8 +16,18 @@ public class PointElement extends Element {
         Element last = source.getLast();
         if(last != null  )
         {
-            if(available.contains(last.getClass()))
-                return action.add;
+            if(last.getClass() == NumberElement.class)
+            {
+                NumberElement element = (NumberElement)last;
+                if(!source.isDotAvailble())
+                {
+                    return action.ignore;
+                }
+                else
+                {
+                    return action.add;
+                }
+            }
             else if (change.contains(last.getClass()))
                 return action.change;
             else
@@ -25,6 +35,6 @@ public class PointElement extends Element {
                 return action.ignore;
             }
         }
-        return action.add;
+        return action.ignore;
     }
 }

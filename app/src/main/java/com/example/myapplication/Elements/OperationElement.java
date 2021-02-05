@@ -16,7 +16,11 @@ public class OperationElement extends Element {
         if(last != null  )
         {
             if(available.contains(last.getClass()))
+            {
+                source.set_dotAvailable(true);
                 return action.add;
+            }
+
             else if (change.contains(last.getClass()))
                 return action.change;
             else
@@ -24,6 +28,6 @@ public class OperationElement extends Element {
                 return action.ignore;
             }
         }
-        return action.add;
+        return action.ignore;
     }
 }
