@@ -65,7 +65,11 @@ public class ElementsContainer {
     }
     private void addElement(Element element)
     {
-        elements.add(element);
+        if(toString().length()<14*5)
+        {
+            elements.add(element);
+        }
+
     }
 
     private void changeLastElement(Element element)

@@ -42,23 +42,21 @@ public class SignUp extends AppCompatActivity {
         String confirm = confirmEdit.getText().toString();
         String name = nameEdit.getText().toString();
         String login = loginEdit.getText().toString();
-        if(name != "" && login != "" && password != "" && confirm.equals(password))
+        if(validateName(name) && validateLogin(login) && password != "" && confirm.equals(password))
         {
             confirmSignUp(name, login, password);
         }
         else {
-            {
 
-            }
         }
     }
     private boolean validateName(String name)
     {
-        return name != null && name != "" && name.length()>4 && name.length()<16;
+        return name != null && name != "" && name.length()>2 && name.length()<16;
     }
     private boolean validateLogin(String login)
     {
-        return login != null && login != "" && login.length()>10 && login.length()<16 && login.contains("@");
+        return login != null && login != "" && login.length()>4 && login.length()<16 && login.contains("@") && login.charAt(login.length()-1)=='y'&& login.charAt(login.length()-2)=='b'&& login.charAt(login.length()-3)=='.';
     }
 
     private void confirmSignUp(String name, String login, String password)

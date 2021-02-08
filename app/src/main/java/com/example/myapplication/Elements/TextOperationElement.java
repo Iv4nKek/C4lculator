@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class TextOperationElement extends Element {
     ArrayList <Class<?>> available  = new ArrayList <>(Arrays.asList(OperationElement.class,LeftBracket.class));
-    ArrayList<Class<?>> change  = new ArrayList <>(Arrays.asList());
+    ArrayList<Class<?>> change  = new ArrayList <>(Arrays.asList(ErrorElement.class));
     public TextOperationElement(String text) {
         super(text);
     }

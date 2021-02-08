@@ -55,7 +55,7 @@
                 android:rotationX="0"
                 android:text="/" />
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".1">
@@ -80,8 +80,9 @@
                     android:layout_marginRight="0dp"
                     android:layout_marginBottom="0dp"
                     android:layout_weight=".1"
-                    android:background="#FFFFFF"
+                    android:background="#00FFFFFF"
                     android:onClick="backSpace"
+                    android:outlineAmbientShadowColor="#00FFFFFF"
                     android:shadowColor="#00FFFFFF"
                     android:text=""
                     app:backgroundTint="#00FFFFFF"
@@ -90,7 +91,7 @@
                     app:rippleColor="#00FFFFFF" />
 
 
-            </RelativeLayout>
+            </FrameLayout>
 
         </TableRow>
 
@@ -115,7 +116,7 @@
                 android:layout_weight=".1"
                 android:onClick="mSum"
                 android:rotationX="0"
-                android:text="M"
+                android:text="M+"
                 app:backgroundTint="#060E39" />
 
             <Button
@@ -163,8 +164,7 @@
                 android:layout_weight=".1"
                 android:onClick="cos"
                 android:rotationX="0"
-                android:text="c
-" />
+                android:text="cos" />
 
             <Button
                 android:id="@+id/leftBracket"
@@ -342,19 +342,16 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:background="#00B81A1A"
         android:gravity="bottom|right"
-        android:text="vgdasdas"
         android:textColor="#d3def2"
         android:textSize="48sp"
         android:textStyle="bold"
-        app:autoSizeTextType="none"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             error = false;
         }
         action act = _container.handleElement(toAdd);
+
         _textView.setText(_container.toString());
         System.out.println(_container.toString());
         return act;
@@ -140,18 +141,18 @@ public class MainActivity extends AppCompatActivity {
     }
     public void cos(View view)
     {
-        if(AddElement(new TextOperationElement("cos"))==action.add)
+        if(AddElement(new TextOperationElement("cos"))!=action.ignore)
             AddElement(new LeftBracket("("));
 
     }
     public void sin(View view)
     {
-        if(AddElement(new TextOperationElement("sin"))==action.add)
+        if(AddElement(new TextOperationElement("sin"))!=action.ignore)
             AddElement(new LeftBracket("("));
     }
     public void mSum(View view)
     {
-        double result = _calculator.evaluate(_text);
+        double result = _calculator.evaluate(_container.toString());
         if(!Double.isNaN(result))
         {
             _calculator.addToMemory(result);
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void mSub(View view)
     {
-        double result = _calculator.evaluate(_text);
+        double result = _calculator.evaluate(_container.toString());
         if(!Double.isNaN(result))
         {
             _calculator.addToMemory(-result);
@@ -171,7 +172,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void mR(View view)
     {
-        if(_container.getLast().getClass()!= NumberElement.class)
+        if(_container.getLast()==null)
+        {
+            AddElement(new NumberElement(String.valueOf(_calculator.getMemory())));
+        }
+        else if( _container.getLast().getClass()!= NumberElement.class && _container.getLast().getClass()!= PointElement.class)
             AddElement(new NumberElement(String.valueOf(_calculator.getMemory())));
     }
     public void zero(View view)
