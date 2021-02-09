@@ -57,22 +57,23 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
                 android:layout_weight=".1">
 
                 <ImageView
                     android:id="@+id/imageView"
                     style="@style/GreenText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
                     android:background="@color/purple_500"
                     android:src="@android:drawable/ic_input_delete" />
 
                 <Button
                     android:id="@+id/backspace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="0dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"

@@ -39,6 +39,12 @@ public class ElementsContainer {
         if(elements != null && elements.size()!=0)
         {
             elements.remove(elements.size()-1);
+            if(elements.size()!=0) {
+                Element last = elements.get(elements.size() - 1);
+                if (last.getClass() == TextOperationElement.class) {
+                    deleteLat();
+                }
+            }
         }
     }
     public Element  getLast()
@@ -71,7 +77,17 @@ public class ElementsContainer {
         }
 
     }
-
+    public int getBracketSum()
+    {
+        int sum = 0;
+        for (char c:toString().toCharArray()) {
+            if(c == '(')
+                sum--;
+            else if(c == ')')
+                sum++;
+        }
+        return sum;
+    }
     private void changeLastElement(Element element)
     {
         if(elements.size() == 0)

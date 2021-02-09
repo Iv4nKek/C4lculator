@@ -12,7 +12,7 @@ public class RightBracket extends BracketElement {
 
     @Override
     protected action GetAction(ElementsContainer source) {
-        int bracketSum = getBracketSum(source);
+        int bracketSum =source.getBracketSum();
         Element last = source.getLast();
         if(last != null  )
         {

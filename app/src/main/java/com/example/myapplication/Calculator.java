@@ -1,7 +1,8 @@
 package com.example.myapplication;
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
 
+
+
+import org.mariuszgromada.math.mxparser.*;
 public class Calculator {
     private double memory;
 
@@ -35,8 +36,8 @@ public class Calculator {
         double output;
         try
         {
-            Expression c = new ExpressionBuilder(text).build();
-            output = c.evaluate();
+            Expression c = new Expression(text);
+            output = c.calculate();
         }
         catch (Exception e)
         {
