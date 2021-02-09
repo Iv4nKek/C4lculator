@@ -40,7 +40,7 @@ dependencies {
     implementation 'net.objecthunter:exp4j:0.4.8'
     implementation 'androidx.core:core:1.5.0-beta01'
     implementation 'org.jetbrains:annotations:15.0'
-    implementation files('C:\\Projects\\C4lculator\\.idea\\libraries\\MathParser.org-mXparser-v.4.4.0-jdk10.jar')
+    implementation files('C:\\Users\\ivank\\Desktop\\MyApplication\\.idea\\libraries\\MathParser.org-mXparser-v.4.4.0-jdk10.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

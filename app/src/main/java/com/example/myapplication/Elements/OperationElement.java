@@ -15,6 +15,8 @@ public class OperationElement extends Element {
         Element last = source.getLast();
         if(last != null  )
         {
+            if(source.getLast().getClass() == OperationElement.class && source.elements.size()==1)
+                return action.ignore;
             if(available.contains(last.getClass()))
             {
                 source.set_dotAvailable(true);
@@ -27,6 +29,10 @@ public class OperationElement extends Element {
             {
                 return action.ignore;
             }
+        }
+        else if( text == "-")
+        {
+            return action.add;
         }
         return action.ignore;
     }

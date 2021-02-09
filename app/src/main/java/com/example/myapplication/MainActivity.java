@@ -229,6 +229,11 @@ public class MainActivity extends AppCompatActivity {
         double result = _calculator.evaluate(_container.toString());
 
         _container.clear();
+        if(Double.isInfinite(result))
+        {
+            AddElement(new ErrorElement("error"));
+            error = true;
+        }
         if(!Double.isNaN(result))
         {
             String toAdd = String.valueOf(result);
@@ -249,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             AddElement(new ErrorElement("error"));
-
             error = true;
         }
     }
