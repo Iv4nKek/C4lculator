@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true"
     tools:context=".Galery">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/add"
         android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:onClick="getImage"
-
+        android:layout_height="40dp"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -20,45 +19,87 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3">
+        app:layout_constraintTop_toBottomOf="@+id/add">
 
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.myapplication.AddImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            tools:layout="@layout/fragment_add_image" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <!-- Content here -->
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    app:srcCompat="@android:drawable/ic_input_add" />
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    app:srcCompat="@android:drawable/presence_busy" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="0.01"
+            android:background="?android:attr/listDivider"
+            android:foreground="@color/black" />
 
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    app:srcCompat="@android:drawable/btn_star_big_on" />
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/imageView9"
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/imageLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    app:srcCompat="@android:drawable/presence_busy" />
-            </LinearLayout>
-        </ScrollView>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- Content here -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:layout_marginTop="5pt"
+                            app:srcCompat="@drawable/ricardo" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="5pt"
+                        app:srcCompat="@drawable/hitler" />
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="5pt"
+                        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="5pt"
+                        app:srcCompat="@android:drawable/presence_busy" />
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

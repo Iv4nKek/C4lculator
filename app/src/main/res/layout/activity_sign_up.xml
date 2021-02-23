@@ -3,72 +3,194 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true"
     tools:context=".SignUp">
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:drawableBottom="@color/purple_200"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/name">
+
+        <TextView
+            android:id="@+id/nameReq1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left|center_vertical"
+            android:text="Больше 4 и меньше 16 символов"
+            android:textColor="#FF1744"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="login"
+        android:inputType="textPersonName"
+        android:password="false"
+        android:phoneNumber="false"
+        android:text="qwe"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/login">
+
+        <TextView
+            android:id="@+id/mailReq1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left|center_vertical"
+            android:text="Некорректный emal"
+            android:textColor="#FF1744"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName"
         android:password="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
-    <EditText
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="login"
-        android:inputType="textPersonName"
-        android:phoneNumber="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/confirm"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/password">
+
+        <TextView
+            android:id="@+id/passReq1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left|center_vertical"
+            android:text="от 4 до 16 символов"
+            android:textColor="#FF1744"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/passReq2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left|center_vertical"
+            android:text="верхний и нижний регистр"
+            android:textColor="#FF1744"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/passReq3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left|center_vertical"
+            android:text="содержит цифры"
+            android:textColor="#FF1744"
+            android:visibility="invisible" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/confirm"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:ems="10"
         android:hint="Comfirm password"
         android:inputType="textPersonName"
         android:password="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/confirm">
+
+        <TextView
+            android:id="@+id/confReq1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left|center_vertical"
+            android:text="пароли не совпадают"
+            android:textColor="#FF1744"
+            android:visibility="invisible" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/next"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:onClick="SignUp"
-        android:text="Confirm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirm" />
+        android:background="#FFFFFF"
+        android:text="SignUp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@color/dark"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
