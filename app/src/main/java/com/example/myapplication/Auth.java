@@ -12,12 +12,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -55,6 +57,7 @@ public class Auth extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.activity_auth, container, false);
         root.findViewById(R.id.sign_in_button).setOnClickListener(this);
         root.findViewById(R.id.button).setOnClickListener(this);
+        root.findViewById(R.id.authButton).setOnClickListener(this);
      //   root.findViewById(R.id.authButton).setOnClickListener(this);
         if(root.findViewById(R.id.editLogin)==null)
             try {
@@ -73,6 +76,23 @@ public class Auth extends Fragment implements View.OnClickListener {
             password = newPassword;
         }
         return root;
+    }
+    Toast toast;
+    public void showToast() {
+        if(toast != null)
+        {
+            toast.cancel();
+        }
+        //создаём и отображаем текстовое уведомление
+        toast = Toast.makeText(getContext(),
+                "Пора покормить кота!",
+                Toast.LENGTH_SHORT);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.auth_toast, null);
+        toast.setView(view);
+        toast.setGravity(Gravity.TOP, 0, 450);
+
+        toast.show();
     }
    // @Override
  /*   public void onCreate(Bundle savedInstanceState) {
@@ -122,7 +142,14 @@ public class Auth extends Fragment implements View.OnClickListener {
             case R.id.button:
                 signIn();
                 break;
+            case R.id.authButton:
+                OpenSignUp();
+                break;
         }
+    }
+    private void OpenSignUp()
+    {
+        ((MainActivity)getActivity()).OpenSignUp();
     }
 
     public void googleSignIn()
@@ -144,6 +171,7 @@ public class Auth extends Fragment implements View.OnClickListener {
         else
         {
             System.out.println("kekW2");
+            showToast();
         }
     }
     private void OpenCalculator()

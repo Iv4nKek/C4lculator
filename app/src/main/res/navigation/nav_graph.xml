@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/gallery">
+    app:startDestination="@id/signup">
 
     <fragment
         android:id="@+id/auth"
@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/signup"
         android:name="com.example.myapplication.SignUp"
-        android:label="signup"
+        android:label="SignUp"
         tools:layout="@layout/activity_sign_up" />
 </navigation>

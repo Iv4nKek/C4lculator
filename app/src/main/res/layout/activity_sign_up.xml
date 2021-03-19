@@ -11,12 +11,8 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,14 +22,15 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:drawableBottom="@color/purple_200"
+        android:layout_marginTop="20dp"
+        android:drawableBottom="#28FF03"
         android:ems="10"
         android:hint="Name"
+
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -52,7 +49,8 @@
             android:gravity="center|left|center_vertical"
             android:text="Больше 4 и меньше 16 символов"
             android:textColor="#FF1744"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            />
 
     </LinearLayout>
 
@@ -60,20 +58,19 @@
         android:id="@+id/login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="login"
         android:inputType="textPersonName"
         android:password="false"
         android:phoneNumber="false"
-        android:text="qwe"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/name"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout33"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:orientation="vertical"
@@ -96,7 +93,7 @@
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName"
@@ -182,12 +179,14 @@
     <Button
         android:id="@+id/next"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:background="#FFFFFF"
         android:text="SignUp"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:backgroundTint="@color/dark"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.496"

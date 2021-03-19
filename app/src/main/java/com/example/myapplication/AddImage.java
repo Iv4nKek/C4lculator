@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -22,11 +23,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddImage#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AddImage extends Fragment implements View.OnClickListener {
 
     private static final int PICK_PHOTO_FOR_AVATAR = 0;
@@ -43,26 +40,23 @@ public class AddImage extends Fragment implements View.OnClickListener {
     private Bitmap _currentImage;
     private ArrayList<Uri> _musics;
     private Uri _music;
+    private Bitmap _default;
+    private ImageView _preview;
 
     public AddImage() {
         // Required empty public constructor
     }
-    public static AddImage newInstance(String param1, String param2) {
-        AddImage fragment = new AddImage();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
+    public void reset()
+    {
+        ((Button)_root.findViewById(R.id.commit)).setVisibility(View.GONE);
+        _preview.setImageBitmap(_default);
+        _currentImage = null;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -72,8 +66,12 @@ public class AddImage extends Fragment implements View.OnClickListener {
         _root.findViewById(R.id.addImage).setOnClickListener(this);
         _root.findViewById(R.id.commit).setOnClickListener(this);
         _root.findViewById(R.id.addMusic).setOnClickListener(this);
+        _preview = (ImageView) _root.findViewById(R.id.preview);
         _activity = (MainActivity)getActivity();
         _musics = new ArrayList<>();
+
+        BitmapDrawable drawable = (BitmapDrawable) _preview.getDrawable();
+        _default = drawable.getBitmap();
         return _root;
     }
     @Override

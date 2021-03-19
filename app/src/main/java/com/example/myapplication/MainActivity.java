@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    public void OpenSignUp(View view)
+    public void OpenSignUp()
     {
         Fragment newFragment = new SignUp();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

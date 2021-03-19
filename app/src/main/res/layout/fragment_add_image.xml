@@ -11,53 +11,53 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/layout_bg"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/preview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:src="@drawable/hitler" />
-
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/addImage"
-                android:layout_width="wrap_content"
+                android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:layout_weight="1"
+                android:gravity="center"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:text="Add Image" />
 
             <Button
                 android:id="@+id/addMusic"
-                android:layout_width="wrap_content"
+                android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:layout_weight="1"
+                android:gravity="center"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:text="Add Music" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         </LinearLayout>
 
@@ -66,10 +66,23 @@
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="0.2"
             android:paddingTop="0dp"
             android:text="Comit"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:src="@drawable/hitler"
+            app:srcCompat="@drawable/hitler" />
 
     </LinearLayout>
 
