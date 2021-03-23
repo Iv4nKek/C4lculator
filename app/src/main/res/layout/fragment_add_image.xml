@@ -81,8 +81,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="#00FFFFFF"
-            android:src="@drawable/hitler"
-            app:srcCompat="@drawable/hitler" />
+            app:srcCompat="@android:drawable/ic_menu_help" />
 
     </LinearLayout>
 

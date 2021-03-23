@@ -17,11 +17,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioAttributes;
 import android.media.Image;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.myapplication.Elements.ElementsContainer;
 
@@ -61,6 +64,7 @@ public class Galery extends Fragment implements View.OnClickListener {
     private Button pause;
     private MediaPlayer _currentPlayer;
     private boolean _isPlaying;
+    private Toast _toast;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         _root = inflater.inflate(R.layout.activity_galery, container, false);
@@ -106,6 +110,7 @@ public class Galery extends Fragment implements View.OnClickListener {
 
         LinearLayout relativeLayout = (LinearLayout) _root.findViewById(R.id.imageLayout);
         relativeLayout.addView(imageView,0);
+        changeVisibility();
     }
     private void Check(String uri)
     {
@@ -150,7 +155,17 @@ public class Galery extends Fragment implements View.OnClickListener {
         }
         visible = !visible;
     }
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void ShowToast(String text)
+    {
+        if(_toast != null)
+        {
+            _toast.cancel();
+        }
+        _toast = Toast.makeText(getContext(),
+                text, Toast.LENGTH_SHORT);
+        _toast.show();
+    }
+   
     @Override
     public void onClick(View v) {
         if(v.getClass() == ImageView.class)
@@ -227,6 +242,29 @@ public class Galery extends Fragment implements View.OnClickListener {
             }
         }
     }
+
+
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = _activity.getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
     public void playNext(MusicInfo musicInfo) {
         if(musicInfo.musics.size() == 0)
             return;
@@ -243,7 +281,10 @@ public class Galery extends Fragment implements View.OnClickListener {
         if (ContextCompat.checkSelfPermission(
                 getContext(), Manifest.permission.INTERNET) ==
                 PackageManager.PERMISSION_GRANTED) {
+            ShowToast(getFileName(musicInfo.musics.get(musicInfo.current)));
             _currentPlayer = MediaPlayer.create(_activity.getApplicationContext(), musicInfo.musics.get(musicInfo.current));
+          //  ShowToast(getTrackInfo(musicInfo.musics.get(musicInfo.current)));
+
             _currentPlayer.start();
             _isPlaying = true;
             handleButtonsVisibility();
