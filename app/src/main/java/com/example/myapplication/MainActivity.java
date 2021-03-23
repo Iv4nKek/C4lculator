@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+     /*   DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.gallery, R.id.signup, R.id.auth,R.id.calculator)
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        NavigationUI.setupWithNavController(navigationView, navController);*/
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.nav_host_fragment, newFragment);
         transaction.commit();
     }
-    @Override
-    public boolean onSupportNavigateUp() {
+    /*  @Override
+  public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
+    }*/
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

@@ -58,7 +58,7 @@ public class SignUp extends Fragment implements View.OnClickListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         View root = inflater.inflate(R.layout.activity_sign_up, container, false);
         _activity = (MainActivity)getActivity();
         nameEdit = root.findViewById(R.id.name);

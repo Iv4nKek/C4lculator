@@ -93,7 +93,8 @@ public class Galery extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        _currentPlayer.stop();
+        if(_currentPlayer != null)
+            _currentPlayer.stop();
     }
 
     public void addImage(Bitmap bitmap, ArrayList<Uri> musics)
