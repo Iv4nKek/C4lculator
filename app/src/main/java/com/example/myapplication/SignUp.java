@@ -29,7 +29,7 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SignUp extends Fragment implements View.OnClickListener {
+public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     private EditText nameEdit;
     private EditText loginEdit;
@@ -38,6 +38,7 @@ public class SignUp extends Fragment implements View.OnClickListener {
 
     private TextView nameReq;
     private TextView loginReq;
+    private TextView loginReq2;
     private TextView passwordReq1;
     private TextView passwordReq2;
     private TextView passwordReq3;
@@ -54,25 +55,28 @@ public class SignUp extends Fragment implements View.OnClickListener {
     private boolean confirmState;
     private String regex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
-    private MainActivity _activity;
+    private SignUp _activity;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
        // ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        View root = inflater.inflate(R.layout.activity_sign_up, container, false);
-        _activity = (MainActivity)getActivity();
-        nameEdit = root.findViewById(R.id.name);
-        loginEdit = root.findViewById(R.id.login);
-        passwordEdit = root.findViewById(R.id.password);
-        confirmEdit = root.findViewById(R.id.confirm);
+        //View root = inflater.inflate(R.layout.activity_sign_up, container, false);
+        setContentView(R.layout.activity_sign_up);
+        _activity = this;
+        nameEdit = findViewById(R.id.name);
+        loginEdit = findViewById(R.id.login);
+        passwordEdit =findViewById(R.id.password);
+        confirmEdit = findViewById(R.id.confirm);
 
-        nameReq  =root.findViewById(R.id.nameReq1);
-        loginReq  =root.findViewById(R.id.mailReq1);
-        passwordReq1  =root.findViewById(R.id.passReq1);
-        passwordReq2  =root.findViewById(R.id.passReq2);
-        passwordReq3  =root.findViewById(R.id.passReq3);
-        confirmReq  =root.findViewById(R.id.confReq1);
-        root.findViewById(R.id.next).setOnClickListener(this);
+        nameReq  =findViewById(R.id.nameReq1);
+        loginReq  =findViewById(R.id.mailReq1);
+        loginReq2  =findViewById(R.id.mailReq2);
+        passwordReq1  =findViewById(R.id.passReq1);
+        passwordReq2  =findViewById(R.id.passReq2);
+        passwordReq3  =findViewById(R.id.passReq3);
+        confirmReq  =findViewById(R.id.confReq1);
+        findViewById(R.id.next).setOnClickListener(this);
+        findViewById(R.id.back).setOnClickListener(this);
         nameEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -175,44 +179,63 @@ public class SignUp extends Fragment implements View.OnClickListener {
             CheckConfirm(confirmEdit.getText());
         });
 
-        return root;
+    }
+    private CharSequence processTextOverflow(EditText view, int max)
+    {
+        CharSequence s = view.getText();
+        if(s.length()>= max)
+        {
+            view.setText(s.subSequence(0,s.length()-1));
+            view.setSelection(s.length()-1);
+        }
+        return view.getText();
+
     }
     private void CheckName(CharSequence s)
     {
-        if(s.length()>16)
-        {
-            nameEdit.setText(s.subSequence(0,s.length()-1));
-        }
+        s =processTextOverflow(nameEdit,16);
         if(s.length()>4 && s.length()<17)
         {
             //nameReq.setTextColor(Color.parseColor(green));
-            nameEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_green_light));
+            nameEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_light));
             nameReq.setVisibility(View.INVISIBLE);
             nameState =true;
         }
         else
         {
-            nameEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_red_light));
+            nameEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_red_light));
             nameReq.setVisibility(View.VISIBLE);
             nameState = false;
             nameReq.setTextColor(Color.parseColor(red));
         }
     }
+    private boolean containsDomain(CharSequence s)
+    {
+        CharSequence domain = "@bsuir.by";
+        return s.toString().contains(domain);
+    }
     private void CheckEmail(CharSequence s)
     {
+        s =processTextOverflow(loginEdit,30);
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
-        if(!matcher.find() || s.length() == 0)
+        boolean containsDomain = containsDomain(s);
+        updateTextColor(loginReq,matcher.find());
+        updateTextColor(loginReq2,containsDomain);
+        if(!matcher.find() || s.length() == 0 || !containsDomain)
         {
             loginReq.setVisibility(View.VISIBLE);
+            loginReq2.setVisibility(View.VISIBLE);
             loginState = false;
-            loginEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_red_light));
+            loginEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_red_light));
         }
         else
         {
-            loginEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_green_light));
+            loginEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_light));
             loginState = true;
             loginReq.setVisibility(View.INVISIBLE);
+            loginReq2.setVisibility(View.INVISIBLE);
+
         }
     }
     Toast toast;
@@ -222,10 +245,10 @@ public class SignUp extends Fragment implements View.OnClickListener {
             toast.cancel();
         }
         //создаём и отображаем текстовое уведомление
-        toast = Toast.makeText(getContext(),
+        toast = Toast.makeText(getApplicationContext(),
                 "Пора покормить кота!",
                 Toast.LENGTH_SHORT);
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.signup_toast, null);
         toast.setView(view);
         toast.setGravity(Gravity.TOP, 0, 1350);
@@ -234,7 +257,9 @@ public class SignUp extends Fragment implements View.OnClickListener {
     }
     private void CheckPassword(CharSequence s)
     {
-        boolean req1 = s.length()>4 && s.length()<16;
+        s = processTextOverflow(passwordEdit,16);
+
+        boolean req1 = s.length()>4 && s.length()<17;
 
 
         updateTextColor(passwordReq1,req1);
@@ -248,9 +273,6 @@ public class SignUp extends Fragment implements View.OnClickListener {
         matcher = pattern.matcher(s);
         boolean req3 =matcher.find();
         updateTextColor(passwordReq3,req3);
-        System.out.println(req1);
-        System.out.println(req2);
-        System.out.println(req3);
         updateTextColor(passwordReq3,req3);
         if(req1 && req2 && req3)
         {
@@ -258,14 +280,14 @@ public class SignUp extends Fragment implements View.OnClickListener {
             passwordReq1.setVisibility(View.INVISIBLE);
             passwordReq2.setVisibility(View.INVISIBLE);
             passwordReq3.setVisibility(View.INVISIBLE);
-            passwordEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_green_light));
+            passwordEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_light));
         }
         else
         {
             passwordReq1.setVisibility(View.VISIBLE);
             passwordReq2.setVisibility(View.VISIBLE);
             passwordReq3.setVisibility(View.VISIBLE);
-            passwordEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_red_light));
+            passwordEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_red_light));
         }
 
 
@@ -277,11 +299,12 @@ public class SignUp extends Fragment implements View.OnClickListener {
     }
     private void CheckConfirm(CharSequence s)
     {
+        s =processTextOverflow(confirmEdit,16);
         if(passwordEdit.getText().toString().contentEquals(s))
         {
            // confirmReq.setText("пароли совпадают");
           //  confirmReq.setTextColor(Color.parseColor(green));
-            confirmEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_green_light));
+            confirmEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_light));
             confirmReq.setVisibility(View.INVISIBLE);
             confirmState =true;
         }
@@ -292,7 +315,7 @@ public class SignUp extends Fragment implements View.OnClickListener {
             confirmReq.setVisibility(View.VISIBLE);
             confirmReq.setTextColor(Color.parseColor(red));
             confirmState  =false;
-            confirmEdit.setBackgroundTintList(getContext().getResources().getColorStateList(android.R.color.holo_red_light));
+            confirmEdit.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_red_light));
         }
 
     }
@@ -337,6 +360,9 @@ public class SignUp extends Fragment implements View.OnClickListener {
             case R.id.next:
                 SignUp();
                 break;
+            case R.id.back:
+                backToAuth();
+                break;
         }
     }
 
@@ -352,6 +378,7 @@ public class SignUp extends Fragment implements View.OnClickListener {
         {
             showToast();
             TurnOnName();
+
             TurnOnPassword();
             TurnOnConfirm();
             CheckName(nameEdit.getText());
@@ -360,13 +387,18 @@ public class SignUp extends Fragment implements View.OnClickListener {
             CheckConfirm(confirmEdit.getText());
         }
     }
+    public void backToAuth()
+    {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
     private void confirmSignUp(String login, String password)
     {
-        ((MainActivity)getActivity()).OpenAuth();
-        /*Intent intent = new Intent(getActivity(),Auth.class);
-        intent.putExtra("name",name);
+       // ((MainActivity)getActivity()).OpenAuth();
+        Intent intent = new Intent(this,MainActivity.class);
+      //  intent.putExtra("name",name);
         intent.putExtra("login",login);
         intent.putExtra("password",password);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 }

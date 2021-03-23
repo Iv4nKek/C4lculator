@@ -323,13 +323,27 @@
         android:layout_marginBottom="20dp"
         android:background="#00B81A1A"
         android:gravity="bottom|right"
-        android:text="qwerwe"
+        android:text=""
         android:textColor="#d3def2"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+
+        android:id="@+id/back"
+        style="@style/GreenText"
+        android:onClick="OpenAuth"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:foreground="@drawable/abc_vector_test"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

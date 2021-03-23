@@ -13,10 +13,6 @@
             android:icon="@drawable/ricardo"
             android:title="Gallery" />
         <item
-            android:id="@+id/auth"
-            android:icon="@drawable/ricardo"
-            android:title="Auth" />
-        <item
             android:id="@+id/signup"
             android:icon="@drawable/ricardo"
             android:title="SignUp" />

@@ -9,6 +9,19 @@
     android:clickable="true"
     tools:context=".SignUp">
 
+    <Button
+        android:id="@+id/back"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#EA0303"
+        android:backgroundTint="@color/dark"
+        android:foreground="@drawable/abc_vector_test"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/view"
         android:layout_width="300dp"
@@ -22,10 +35,10 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="70dp"
         android:drawableBottom="#28FF03"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Имя"
 
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/view"
@@ -47,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|left|center_vertical"
-            android:text="Больше 4 и меньше 16 символов"
+            android:text="от 4 до 16 символов"
             android:textColor="#FF1744"
             android:visibility="invisible"
             />
@@ -60,19 +73,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="login"
+        android:hint="E-mail"
         android:inputType="textPersonName"
         android:password="false"
         android:phoneNumber="false"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/name"/>
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <LinearLayout
         android:id="@+id/linearLayout33"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
@@ -83,7 +96,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|left|center_vertical"
-            android:text="Некорректный emal"
+            android:text="Некорректный email"
+            android:textColor="#FF1744"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/mailReq2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left|center_vertical"
+            android:text="домен bsuir.by"
             android:textColor="#FF1744"
             android:visibility="invisible" />
 
@@ -93,9 +115,9 @@
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Пароль"
         android:inputType="textPersonName"
         android:password="true"
         app:layout_constraintEnd_toEndOf="@+id/view"
@@ -127,7 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|left|center_vertical"
-            android:text="верхний и нижний регистр"
+            android:text="верхний и нижний регистры"
             android:textColor="#FF1744"
             android:visibility="invisible" />
 
@@ -148,7 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:ems="10"
-        android:hint="Comfirm password"
+        android:hint="Подтверждение пароля"
         android:inputType="textPersonName"
         android:password="true"
         app:layout_constraintEnd_toEndOf="@+id/view"

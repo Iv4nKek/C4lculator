@@ -57,14 +57,19 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    public void OpenSignUp()
+ /*   public void OpenSignUp()
     {
         Fragment newFragment = new SignUp();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_host_fragment, newFragment);
         transaction.commit();
+    }*/
+    public void OpenSignUpActivity()
+    {
+        Intent intent = new Intent(this,SignUp.class);
+        startActivity(intent);
     }
-    public void OpenAuth()
+    public void OpenAuth(View view)
     {
         Fragment newFragment = new Auth();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
