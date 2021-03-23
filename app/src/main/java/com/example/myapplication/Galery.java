@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -61,6 +62,9 @@ public class Galery extends Fragment implements View.OnClickListener {
     private Button pause;
     private MediaPlayer _currentPlayer;
     private boolean _isPlaying;
+    private RecyclerView _recycleView;
+    private ArrayList<Post> _posts = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         _root = inflater.inflate(R.layout.activity_galery, container, false);
@@ -80,6 +84,11 @@ public class Galery extends Fragment implements View.OnClickListener {
         _fragmentView =_root.findViewById(R.id.fragment);
         _imageView = _fragmentView.findViewById(R.id.preview);
 
+        _recycleView = _root.findViewById(R.id.RecycleView);
+        generatePosts();
+        PostAdapter adapter = new PostAdapter(getContext(), _posts);
+        _recycleView.setAdapter(adapter);
+
         _fragmentView.setVisibility(View.GONE);
         _default = _imageView.getDrawingCache(false);
         BitmapDrawable drawable = (BitmapDrawable) _imageView.getDrawable();
@@ -89,7 +98,13 @@ public class Galery extends Fragment implements View.OnClickListener {
         return _root;
 
     }
+    private void generatePosts()
+    {
+        Post ricardoPost = new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ricardo),"Подарок на 8 марта","На 8 марта один из пацанов 824401 решил подарить девушкам очень необыкновеннй танец.");
+        _posts.add(new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hitler),"Новый ученик в группе 420401","Ряды группы 824401 пополнились новым студентов. Он увлекается живописью и любит детей."));
+        _posts.add(ricardoPost);
 
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -104,8 +119,8 @@ public class Galery extends Fragment implements View.OnClickListener {
         _musics.put(imageView,new MusicInfo(musics));
         imageView.setOnClickListener(this);
 
-        LinearLayout relativeLayout = (LinearLayout) _root.findViewById(R.id.imageLayout);
-        relativeLayout.addView(imageView,0);
+       // LinearLayout relativeLayout = (LinearLayout) _root.findViewById(R.id.imageLayout);
+      //  relativeLayout.addView(imageView,0);
     }
     private void Check(String uri)
     {
