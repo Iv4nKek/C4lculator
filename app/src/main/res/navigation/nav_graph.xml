@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signup">
+    app:startDestination="@id/addPost">
 
     <fragment
         android:id="@+id/auth"
@@ -12,15 +12,20 @@
         tools:layout="@layout/activity_auth"/>
     <fragment
         android:id="@+id/calculator"
-        android:name="com.example.myapplication.Calculator"
+        android:name="com.example.myapplication.Calculator.Calculator"
         android:label="calculator"
         tools:layout="@layout/fragment_calculator" />
 
     <fragment
         android:id="@+id/gallery"
-        android:name="com.example.myapplication.Galery"
+        android:name="com.example.myapplication.Galery.Galery"
         android:label="gallery"
         tools:layout="@layout/activity_galery" />
+    <fragment
+        android:id="@+id/addPost"
+        android:name="com.example.myapplication.Galery.AddPost"
+        android:label="add Post"
+        tools:layout="@layout/fragment_add_post" />
 
     <fragment
         android:id="@+id/signup"

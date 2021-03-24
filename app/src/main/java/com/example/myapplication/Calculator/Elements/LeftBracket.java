@@ -1,14 +1,16 @@
-package com.example.myapplication.Elements;
+package com.example.myapplication.Calculator.Elements;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TextOperationElement extends Element {
-    ArrayList <Class<?>> available  = new ArrayList <>(Arrays.asList(OperationElement.class,LeftBracket.class));
+public class LeftBracket extends BracketElement {
+    ArrayList<Class<?>> available  = new ArrayList <>(Arrays.asList(OperationElement.class, LeftBracket.class, TextOperationElement.class));
     ArrayList<Class<?>> change  = new ArrayList <>(Arrays.asList(ErrorElement.class));
-    public TextOperationElement(String text) {
+    public LeftBracket(String text) {
         super(text);
     }
+
+    @Override
     protected action GetAction(ElementsContainer source) {
 
         Element last = source.getLast();

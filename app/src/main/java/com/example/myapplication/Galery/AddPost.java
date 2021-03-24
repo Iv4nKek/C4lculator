@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Galery;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,20 +11,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.ArrayList;
 
 
-public class AddImage extends Fragment implements View.OnClickListener {
+public class AddPost extends Fragment implements View.OnClickListener {
 
     private static final int PICK_PHOTO_FOR_AVATAR = 0;
     private static final int PICK_MUSIC_FOR_AVATAR = 1;
@@ -43,13 +44,13 @@ public class AddImage extends Fragment implements View.OnClickListener {
     private Bitmap _default;
     private ImageView _preview;
 
-    public AddImage() {
+    public AddPost() {
         // Required empty public constructor
     }
 
     public void reset()
     {
-        ((Button)_root.findViewById(R.id.commit)).setVisibility(View.GONE);
+        //((Button)_root.findViewById(R.id.commit)).setVisibility(View.GONE);
         _preview.setImageBitmap(_default);
         _currentImage = null;
     }
@@ -62,9 +63,9 @@ public class AddImage extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        _root = inflater.inflate(R.layout.fragment_add_image, container, false);
-        _root.findViewById(R.id.addImage).setOnClickListener(this);
-        _root.findViewById(R.id.commit).setOnClickListener(this);
+        _root = inflater.inflate(R.layout.fragment_add_post, container, false);
+       // _root.findViewById(R.id.addImage).setOnClickListener(this);
+      //  _root.findViewById(R.id.commit).setOnClickListener(this);
         _root.findViewById(R.id.addMusic).setOnClickListener(this);
         _preview = (ImageView) _root.findViewById(R.id.preview);
         _activity = (MainActivity)getActivity();
@@ -78,11 +79,8 @@ public class AddImage extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         System.out.println("onClick");
         switch (v.getId()) {
-            case R.id.addImage:
+            case R.id.selectImage:
                 getImage();
-                break;
-            case R.id.commit:
-                commit();
                 break;
             case R.id.addMusic:
                 getMusic();
@@ -98,10 +96,7 @@ public class AddImage extends Fragment implements View.OnClickListener {
                 _musics = new ArrayList<>();
             }
     }
-    private void addMusic()
-    {
 
-    }
     private void getMusic()
     {
         Intent intent = new Intent();
@@ -135,7 +130,7 @@ public class AddImage extends Fragment implements View.OnClickListener {
                 final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 _currentImage = selectedImage;
-                ((Button)_root.findViewById(R.id.commit)).setVisibility(View.VISIBLE);
+             //   ((Button)_root.findViewById(R.id.commit)).setVisibility(View.VISIBLE);
                 ((ImageView)_root.findViewById(R.id.preview)).setImageBitmap(selectedImage);
 
             } catch (FileNotFoundException e) {

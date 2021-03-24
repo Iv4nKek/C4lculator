@@ -1,4 +1,4 @@
-package com.example.myapplication.Elements;
+package com.example.myapplication.Calculator.Elements;
 
 public class ErrorElement extends Element {
 

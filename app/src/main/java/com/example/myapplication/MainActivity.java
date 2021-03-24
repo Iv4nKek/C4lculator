@@ -4,32 +4,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.myapplication.Elements.Element;
-import com.example.myapplication.Elements.ElementsContainer;
-import com.example.myapplication.Elements.ErrorElement;
-import com.example.myapplication.Elements.LeftBracket;
-import com.example.myapplication.Elements.NumberElement;
-import com.example.myapplication.Elements.OperationElement;
-import com.example.myapplication.Elements.PointElement;
-import com.example.myapplication.Elements.RightBracket;
-import com.example.myapplication.Elements.TextOperationElement;
-import com.example.myapplication.Elements.action;
+import com.example.myapplication.Calculator.Calculator;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {

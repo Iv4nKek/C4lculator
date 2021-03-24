@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Calculator;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,16 +8,19 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Elements.Element;
-import com.example.myapplication.Elements.ElementsContainer;
-import com.example.myapplication.Elements.ErrorElement;
-import com.example.myapplication.Elements.LeftBracket;
-import com.example.myapplication.Elements.NumberElement;
-import com.example.myapplication.Elements.OperationElement;
-import com.example.myapplication.Elements.PointElement;
-import com.example.myapplication.Elements.RightBracket;
-import com.example.myapplication.Elements.TextOperationElement;
-import com.example.myapplication.Elements.action;
+import com.example.myapplication.Calculator.Elements.Element;
+import com.example.myapplication.Calculator.Elements.ElementsContainer;
+import com.example.myapplication.Calculator.Elements.ErrorElement;
+import com.example.myapplication.Calculator.Elements.LeftBracket;
+import com.example.myapplication.Calculator.Elements.NumberElement;
+import com.example.myapplication.Calculator.Elements.OperationElement;
+import com.example.myapplication.Calculator.Elements.PointElement;
+import com.example.myapplication.Calculator.Elements.RightBracket;
+import com.example.myapplication.Calculator.Elements.TextOperationElement;
+import com.example.myapplication.Calculator.Elements.action;
+import com.example.myapplication.CalculatorHandler;
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
 
 public class Calculator extends Fragment implements View.OnClickListener {
     

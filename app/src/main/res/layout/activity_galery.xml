@@ -7,7 +7,7 @@
     android:layout_marginTop="5dp"
     android:background="#ffffff"
     android:clickable="true"
-    tools:context=".Galery">
+    tools:context=".Galery.Galery">
 
     <Button
         android:id="@+id/pause_but"
@@ -23,6 +23,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="invisible" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:backgroundTintMode="add"
+        android:src="@android:drawable/ic_menu_add"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="55dp"
+        tools:ignore="MissingConstraints" />
     <Button
         android:id="@+id/play_but"
         style="@style/Widget.AppCompat.Button.Small"
@@ -39,13 +53,19 @@
 
     <Button
         android:id="@+id/add"
-        android:layout_width="0dp"
+        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="Add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="14dp"
+        android:paddingTop="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:text="+" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,16 +75,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add">
+        app:layout_constraintTop_toTopOf="parent">
 
         <fragment
 
             android:id="@+id/fragment"
-            android:name="com.example.myapplication.AddImage"
+            android:name="com.example.myapplication.Galery.AddPost"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"
-            tools:layout="@layout/fragment_add_image" />
+            tools:layout="@layout/fragment_add_post" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecycleView"

@@ -1,48 +1,35 @@
-package com.example.myapplication;
+package com.example.myapplication.Galery;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.AudioAttributes;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.example.myapplication.Elements.ElementsContainer;
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Galery extends Fragment implements View.OnClickListener {
 
@@ -56,8 +43,8 @@ public class Galery extends Fragment implements View.OnClickListener {
     private Bitmap _default;
     private ImageView _imageView;
     private View _fragmentView;
-    private AddImage _addImage;
-    private Button _add;
+    private AddPost _addImage;
+    private FloatingActionButton _add;
     private Button play;
     private Button pause;
     private MediaPlayer _currentPlayer;
@@ -70,7 +57,7 @@ public class Galery extends Fragment implements View.OnClickListener {
         _root = inflater.inflate(R.layout.activity_galery, container, false);
         _activity = (MainActivity)getActivity();
 
-        _add =  _root.findViewById(R.id.add);
+        _add =  _root.findViewById(R.id.fabAdd);
         _add.setOnClickListener(this);
 
         play = _root.findViewById(R.id.play_but);
@@ -93,7 +80,7 @@ public class Galery extends Fragment implements View.OnClickListener {
         _default = _imageView.getDrawingCache(false);
         BitmapDrawable drawable = (BitmapDrawable) _imageView.getDrawable();
         _default = drawable.getBitmap();
-        _addImage = (AddImage)getChildFragmentManager().getFragments().get(0);
+        _addImage = (AddPost)getChildFragmentManager().getFragments().get(0);
 
         return _root;
 
@@ -151,17 +138,15 @@ public class Galery extends Fragment implements View.OnClickListener {
     private boolean visible;
     private void changeVisibility()
     {
+        System.out.println("llllllllllllllllllllllll");
         if(visible)
         {
             _fragmentView.setVisibility(View.GONE);
-            _add.setText("Add");
         }
         else
         {
             _fragmentView.setVisibility(View.VISIBLE);
             _addImage.reset();
-
-            _add.setText("Cancel");
         }
         visible = !visible;
     }
@@ -179,7 +164,7 @@ public class Galery extends Fragment implements View.OnClickListener {
         }
 
         switch (v.getId()) {
-            case R.id.add:
+            case R.id.fabAdd:
                 changeVisibility();
                 break;
             case   R.id.pause_but:
