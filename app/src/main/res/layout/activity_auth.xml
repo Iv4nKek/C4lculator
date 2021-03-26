@@ -34,7 +34,7 @@
             android:layout_marginLeft="30dp"
             android:insetTop="4dp"
             android:insetBottom="4dp"
-            android:text="Enter"
+            android:text="Вход"
             android:textAllCaps="false"
             android:textSize="20sp" />
 
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
         android:ems="10"
-        android:hint="login"
+        android:hint="e-mail"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         android:contentDescription="dasffsd"
         android:ems="10"
 
-        android:hint="pasword"
+        android:hint="пароль"
         android:inputType="textPersonName"
         android:password="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,7 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="SignUp"
+        android:text="Регистрация"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
