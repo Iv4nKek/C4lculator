@@ -32,6 +32,7 @@ public class PostAdapter  extends RecyclerView.Adapter<PostHolder>{
     @Override
     public void onBindViewHolder(PostHolder holder, int position) {
         Post post = posts.get(position);
+        holder.setup(post);
         //holder.imageView.setImageBitmap(post.get_image());
        // holder.headerView.setText(post.get_header());
       //  holder.discriptionView.setText(post.get_description());

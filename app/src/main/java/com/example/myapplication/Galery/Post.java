@@ -1,12 +1,12 @@
 package com.example.myapplication.Galery;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
 
 public class Post {
     private Bitmap _image;
     private String _header;
     private String _description;
+    private MusicInfo _musicInfo;
 
     public Bitmap get_image() {
         return _image;
@@ -32,9 +32,18 @@ public class Post {
         this._description = _description;
     }
 
-    public Post(Bitmap _image, String _header, String _description) {
+    public Post(Bitmap _image, String _header, String _description, MusicInfo musicInfo) {
         this._image = _image;
         this._header = _header;
         this._description = _description;
+        _musicInfo = musicInfo;
+    }
+
+    public MusicInfo get_musicInfo() {
+        return _musicInfo;
+    }
+
+    public void set_musicInfo(MusicInfo _musicInfo) {
+        this._musicInfo = _musicInfo;
     }
 }

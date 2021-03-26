@@ -9,10 +9,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.Util;
 
 public class PostHolder extends RecyclerView.ViewHolder {
     private ImageView imageView;
-    private TextView headerView, discriptionView;
+    private TextView headerView, discriptionView,musicName;
     private Button postButton;
     private Button play;
     private Button stop;
@@ -24,5 +25,18 @@ public class PostHolder extends RecyclerView.ViewHolder {
         imageView = (ImageView)view.findViewById(R.id.post_image);
         headerView = (TextView) view.findViewById(R.id.post_name);
         discriptionView = (TextView) view.findViewById(R.id.post_description);
+    }
+    public void setup(Post post)
+    {
+        imageView.setImageBitmap(post.get_image());
+        headerView.setText(post.get_header());
+        discriptionView.setText(post.get_header());
+        Uri musicUri = post.get_musicInfo().musics.get(0);
+        if(musicUri != null)
+        {
+            String music = Util.getFileName(musicUri, _galery.getActivity());
+            musicName.setText(music);
+        }
+
     }
 }

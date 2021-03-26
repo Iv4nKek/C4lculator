@@ -16,12 +16,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.myapplication.Calculator.Calculator;
+import com.example.myapplication.Galery.Galery;
+import com.example.myapplication.Galery.Post;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Runnable {
 
 
     private AppBarConfiguration mAppBarConfiguration;
+    private Fragment _galery;
+    private Post _post;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    public void OpenGalery(Post post)
+    {
+
+        _post = post;
+        if(_galery == null)
+        {
+            _galery = new Galery();
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment, _galery);
+        transaction.commit();
+        transaction.runOnCommit(this);
+
     }
     public void OpenSignUp()
     {
@@ -84,5 +102,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void run() {
+        ((Galery)_galery).AddPost(_post);
+        ((Galery)_galery).AddPost(_post);
+        ((Galery)_galery).AddPost(_post);
+    }
 }

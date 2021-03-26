@@ -51,9 +51,11 @@ public class Galery extends Fragment implements View.OnClickListener {
     private boolean _isPlaying;
     private RecyclerView _recycleView;
     private ArrayList<Post> _posts = new ArrayList<>();
+    private  PostAdapter _adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        System.out.println("Galery opned");
         _root = inflater.inflate(R.layout.activity_galery, container, false);
         _activity = (MainActivity)getActivity();
 
@@ -73,8 +75,8 @@ public class Galery extends Fragment implements View.OnClickListener {
 
         _recycleView = _root.findViewById(R.id.RecycleView);
         generatePosts();
-        PostAdapter adapter = new PostAdapter(getContext(), _posts);
-        _recycleView.setAdapter(adapter);
+        _adapter= new PostAdapter(getContext(), _posts);
+        _recycleView.setAdapter(_adapter);
 
         _fragmentView.setVisibility(View.GONE);
         _default = _imageView.getDrawingCache(false);
@@ -87,8 +89,8 @@ public class Galery extends Fragment implements View.OnClickListener {
     }
     private void generatePosts()
     {
-        Post ricardoPost = new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ricardo),"Подарок на 8 марта","На 8 марта один из пацанов 824401 решил подарить девушкам очень необыкновеннй танец.");
-        _posts.add(new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hitler),"Новый ученик в группе 420401","Ряды группы 824401 пополнились новым студентов. Он увлекается живописью и любит детей."));
+        Post ricardoPost = new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ricardo),"Подарок на 8 марта","На 8 марта один из пацанов 824401 решил подарить девушкам очень необыкновеннй танец.", _current);
+        _posts.add(new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hitler),"Новый ученик в группе 420401","Ряды группы 824401 пополнились новым студентом. Он увлекается живописью и любит детей.", _current));
         _posts.add(ricardoPost);
 
     }
@@ -97,7 +99,13 @@ public class Galery extends Fragment implements View.OnClickListener {
         super.onDestroyView();
         _currentPlayer.stop();
     }
-
+    public void AddPost(Post post)
+    {
+        if(post == null)
+            return;
+        _posts.add(post);
+        _adapter.notifyDataSetChanged();
+    }
     public void addImage(Bitmap bitmap, ArrayList<Uri> musics)
     {
 
