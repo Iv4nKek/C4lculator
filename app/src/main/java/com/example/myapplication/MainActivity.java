@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.myapplication.Calculator.Calculator;
+import com.example.myapplication.Galery.AddPost;
 import com.example.myapplication.Galery.Galery;
 import com.example.myapplication.Galery.Post;
 import com.google.android.material.navigation.NavigationView;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
 
     private AppBarConfiguration mAppBarConfiguration;
-    private Fragment _galery;
+    public Fragment _galery;
     private Post _post;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +34,7 @@ public class MainActivity extends AppCompatActivity implements Runnable {
         setContentView(R.layout.activity_main);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.gallery, R.id.signup, R.id.auth,R.id.calculator)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,6 +45,25 @@ public class MainActivity extends AppCompatActivity implements Runnable {
     {
 
         _post = post;
+        if(_galery == null)
+        {
+            _galery = new Galery();
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment, _galery);
+        transaction.commit();
+        transaction.runOnCommit(this);
+
+    }
+    public void OpenPostAdding()
+    {
+        Fragment newFragment = new AddPost();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment, newFragment);
+        transaction.commit();
+    }
+    public void OpenGalery()
+    {
         if(_galery == null)
         {
             _galery = new Galery();
@@ -104,8 +117,6 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
     @Override
     public void run() {
-        ((Galery)_galery).AddPost(_post);
-        ((Galery)_galery).AddPost(_post);
         ((Galery)_galery).AddPost(_post);
     }
 }

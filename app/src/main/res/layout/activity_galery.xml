@@ -9,20 +9,6 @@
     android:clickable="true"
     tools:context=".Galery.Galery">
 
-    <Button
-        android:id="@+id/pause_but"
-        style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="#FFFFFF"
-        android:backgroundTintMode="add"
-        android:text="Pause"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="invisible" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
@@ -37,19 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="55dp"
         tools:ignore="MissingConstraints" />
-    <Button
-        android:id="@+id/play_but"
-        style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="#FFFFFF"
-        android:backgroundTintMode="add"
-        android:text="Play"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="invisible" />
 
     <Button
         android:id="@+id/add"

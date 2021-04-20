@@ -8,6 +8,16 @@
     android:background="#FFFFFF"
     tools:context=".Galery.AddPost">
 
+    <Button
+        android:id="@+id/Back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:icon="@drawable/abc_vector_test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -22,6 +32,7 @@
 
     <EditText
         android:id="@+id/description"
+        android:autoLink="web"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Description"
@@ -73,7 +84,7 @@
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_weight="1"
         android:background="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +92,7 @@
         app:srcCompat="@android:drawable/ic_menu_help" />
 
     <LinearLayout
-        android:id="@+id/musicLayout"
+        android:id="@+id/musicLayout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
@@ -90,6 +101,13 @@
         app:layout_constraintBottom_toTopOf="@+id/createPost"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addMusic"/>
+        app:layout_constraintTop_toBottomOf="@+id/addMusic">
+
+        <TextView
+            android:id="@+id/musicField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

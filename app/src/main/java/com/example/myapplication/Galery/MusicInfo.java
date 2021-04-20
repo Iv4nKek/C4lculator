@@ -6,21 +6,22 @@ import java.util.ArrayList;
 
 public class MusicInfo {
     public ArrayList<Uri> musics;
+    public Uri music;
     public int current;
 
     @Override
     public String toString() {
         return "MusicInfo{" +
-                "musics=" + musics +
+                "musics=" + music +
                 ", current=" + current +
                 '}';
     }
 
-    public MusicInfo(ArrayList<Uri> musics, Uri music) {
-        this.musics = musics;
+    public MusicInfo(Uri musics, Uri music) {
+        this.music = musics;
     }
 
-    public MusicInfo(ArrayList<Uri> musics) {
-        this.musics = musics;
+    public MusicInfo(Uri musics) {
+        this.music = musics;
     }
 }

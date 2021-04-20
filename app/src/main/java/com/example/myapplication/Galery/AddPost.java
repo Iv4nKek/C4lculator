@@ -3,7 +3,6 @@ package com.example.myapplication.Galery;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,15 +11,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
@@ -28,7 +27,6 @@ import com.example.myapplication.Util;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 
 public class AddPost extends Fragment implements View.OnClickListener {
@@ -45,12 +43,13 @@ public class AddPost extends Fragment implements View.OnClickListener {
     private View _root;
     private MainActivity _activity;
     private Bitmap _currentImage;
-    private ArrayList<Uri> _musics;
+    private Uri _music;
     private Bitmap _default;
     private ImageView _preview;
     private LinearLayout _musicLayout;
     private EditText _header;
     private EditText _description;
+   private TextView _musicView;
 
     public AddPost() {
         // Required empty public constructor
@@ -75,12 +74,14 @@ public class AddPost extends Fragment implements View.OnClickListener {
         _root.findViewById(R.id.selectImage).setOnClickListener(this);
         _root.findViewById(R.id.createPost).setOnClickListener(this);
         _root.findViewById(R.id.addMusic).setOnClickListener(this);
+        _root.findViewById(R.id.Back).setOnClickListener(this);
         _header = _root.findViewById(R.id.header);
         _description = _root.findViewById(R.id.description);
         _preview = (ImageView) _root.findViewById(R.id.preview);
-        _musicLayout = _root.findViewById(R.id.musicLayout);
+        _musicLayout = _root.findViewById(R.id.musicLayout2);
+        _musicView = _root.findViewById(R.id.musicField);
         _activity = (MainActivity)getActivity();
-        _musics = new ArrayList<>();
+       // _musics = new ArrayList<>();
 
         BitmapDrawable drawable = (BitmapDrawable) _preview.getDrawable();
         _default = drawable.getBitmap();
@@ -99,6 +100,8 @@ public class AddPost extends Fragment implements View.OnClickListener {
             case R.id.createPost:
                 commit();
                 break;
+            case R.id.Back:
+                _activity.OpenGalery();
         }
     }
     private void commit()
@@ -107,8 +110,16 @@ public class AddPost extends Fragment implements View.OnClickListener {
         String description = _description.getText().toString();
         if(_currentImage != null && description.length() != 0 && header.length() != 0)
         {
-            _activity.OpenGalery(new Post(_currentImage,header,description,new MusicInfo(_musics)));
+            hideKeyboard(_activity);
+            _activity.OpenGalery(new Post(_currentImage,header,description,new MusicInfo(_music),true));
+            Toast.makeText( getContext(), "Post created", Toast.LENGTH_SHORT).show();
         }
+        else
+        {
+            Toast.makeText( getContext(), "not full data", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     private void getMusic()
@@ -127,18 +138,26 @@ public class AddPost extends Fragment implements View.OnClickListener {
         intent.setType("image/*");
         startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
     }
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_MUSIC_FOR_AVATAR && resultCode == Activity.RESULT_OK)
         {
             Uri uriSound=data.getData();
-            System.out.println(uriSound);
-            System.out.println(uriSound.getPath());
-            _musics.add(uriSound);
-            TextView textView = new TextView(getContext());
-            textView.setText(Util.getFileName(uriSound,_activity));
-            _musicLayout.addView(textView);
+            _music = uriSound;
+            String name= Util.getFileName(uriSound,_activity);
+            _musicView.setText(name);
+            Toast.makeText( getContext(), name, Toast.LENGTH_SHORT).show();
         }
         if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == Activity.RESULT_OK) {
             try {

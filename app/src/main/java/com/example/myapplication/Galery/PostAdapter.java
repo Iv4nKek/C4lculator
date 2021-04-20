@@ -17,25 +17,27 @@ public class PostAdapter  extends RecyclerView.Adapter<PostHolder>{
 
     private final LayoutInflater inflater;
     private final List<Post> posts;
+    Galery galery;
 
-    PostAdapter(Context context, List<Post> posts) {
+    PostAdapter(Context context, List<Post> posts, Galery galery) {
+        this.galery = galery;
         this.posts = posts;
         this.inflater = LayoutInflater.from(context);
     }
     @Override
     public PostHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+        System.out.println("onCreateViewHolder");
         View view = inflater.inflate(R.layout.post_layout, parent, false);
-        return new PostHolder(view, null);
+
+       // View view2 = inflater.inflate(R.layout.post_layout, parent, false);
+        return new PostHolder(view, galery, inflater, parent,this);
     }
 
     @Override
     public void onBindViewHolder(PostHolder holder, int position) {
+        System.out.println("onBindViewHolder");
         Post post = posts.get(position);
         holder.setup(post);
-        //holder.imageView.setImageBitmap(post.get_image());
-       // holder.headerView.setText(post.get_header());
-      //  holder.discriptionView.setText(post.get_description());
     }
 
     @Override

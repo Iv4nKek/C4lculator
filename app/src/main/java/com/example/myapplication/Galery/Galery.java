@@ -45,8 +45,6 @@ public class Galery extends Fragment implements View.OnClickListener {
     private View _fragmentView;
     private AddPost _addImage;
     private FloatingActionButton _add;
-    private Button play;
-    private Button pause;
     private MediaPlayer _currentPlayer;
     private boolean _isPlaying;
     private RecyclerView _recycleView;
@@ -58,24 +56,17 @@ public class Galery extends Fragment implements View.OnClickListener {
         System.out.println("Galery opned");
         _root = inflater.inflate(R.layout.activity_galery, container, false);
         _activity = (MainActivity)getActivity();
-
+        _activity._galery = this;
         _add =  _root.findViewById(R.id.fabAdd);
         _add.setOnClickListener(this);
 
-        play = _root.findViewById(R.id.play_but);
-        play.setOnClickListener(this);
-        play.setVisibility(View.INVISIBLE);
-
-        pause = _root.findViewById(R.id.pause_but);
-        pause.setOnClickListener(this);
-        pause.setVisibility(View.INVISIBLE);
 
         _fragmentView =_root.findViewById(R.id.fragment);
         _imageView = _fragmentView.findViewById(R.id.preview);
 
         _recycleView = _root.findViewById(R.id.RecycleView);
         generatePosts();
-        _adapter= new PostAdapter(getContext(), _posts);
+        _adapter= new PostAdapter(getContext(), _posts,this);
         _recycleView.setAdapter(_adapter);
 
         _fragmentView.setVisibility(View.GONE);
@@ -89,15 +80,22 @@ public class Galery extends Fragment implements View.OnClickListener {
     }
     private void generatePosts()
     {
-        Post ricardoPost = new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ricardo),"Подарок на 8 марта","На 8 марта один из пацанов 824401 решил подарить девушкам очень необыкновеннй танец.", _current);
-        _posts.add(new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hitler),"Новый ученик в группе 420401","Ряды группы 824401 пополнились новым студентом. Он увлекается живописью и любит детей.", _current));
+        if(_posts.size() == 2)
+            _posts.clear();
+        Post ricardoPost = new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ricardo),"Подарок на 8 марта","На 8 марта один из пацанов 824401 решил подарить девушкам очень необыкновеннй танец. Такого не было целоый год.", _current,true);
+        _posts.add(new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hitler),"Новый ученик в группе 420401","Ряды группы 824401 пополнились новым студентом. Он увлекается живописью и любит пму.", _current,false));
         _posts.add(ricardoPost);
+
 
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        _currentPlayer.stop();
+        if(_currentPlayer != null)
+        {
+            _currentPlayer.stop();
+        }
+
     }
     public void AddPost(Post post)
     {
@@ -106,17 +104,7 @@ public class Galery extends Fragment implements View.OnClickListener {
         _posts.add(post);
         _adapter.notifyDataSetChanged();
     }
-    public void addImage(Bitmap bitmap, ArrayList<Uri> musics)
-    {
 
-        ImageView imageView = new ImageView(getContext());
-        imageView.setImageBitmap(bitmap);
-        _musics.put(imageView,new MusicInfo(musics));
-        imageView.setOnClickListener(this);
-
-       // LinearLayout relativeLayout = (LinearLayout) _root.findViewById(R.id.imageLayout);
-      //  relativeLayout.addView(imageView,0);
-    }
     private void Check(String uri)
     {
         ContentResolver cr = _activity.getContentResolver();
@@ -146,41 +134,24 @@ public class Galery extends Fragment implements View.OnClickListener {
     private boolean visible;
     private void changeVisibility()
     {
-        System.out.println("llllllllllllllllllllllll");
-        if(visible)
-        {
-            _fragmentView.setVisibility(View.GONE);
-        }
-        else
-        {
-            _fragmentView.setVisibility(View.VISIBLE);
-            _addImage.reset();
-        }
-        visible = !visible;
+        _activity.OpenPostAdding();
     }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v) {
         if(v.getClass() == ImageView.class)
         {
-            MusicInfo musicInfo = _musics.get((ImageView)v);
+           /* MusicInfo musicInfo = _musics.get((ImageView)v);
             if(musicInfo!=null && musicInfo.musics.size()!=0)
             {
                 playNext(musicInfo);
 
-            }
+            }*/
         }
 
         switch (v.getId()) {
             case R.id.fabAdd:
                 changeVisibility();
-                break;
-            case   R.id.pause_but:
-                pause();
-                break;
-            case   R.id.play_but:
-                resume();
-                break;
         }
     }
     private void ChangeStopStatus()
@@ -206,23 +177,10 @@ public class Galery extends Fragment implements View.OnClickListener {
             {
                 _currentPlayer.start();
                 _isPlaying = true;
-                handleButtonsVisibility();
             }
         }
     }
-    private void handleButtonsVisibility()
-    {
-        if(_isPlaying)
-        {
-            play.setVisibility(View.INVISIBLE);
-            pause.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            play.setVisibility(View.VISIBLE);
-            pause.setVisibility(View.INVISIBLE);
-        }
-    }
+
     private void pause()
     {
         if(_currentPlayer!= null) {
@@ -231,31 +189,48 @@ public class Galery extends Fragment implements View.OnClickListener {
             {
                 _currentPlayer.pause();
                 _isPlaying = false;
-                handleButtonsVisibility();
             }
         }
     }
-    public void playNext(MusicInfo musicInfo) {
-        if(musicInfo.musics.size() == 0)
+    public void changeMusicStatus(MusicInfo musicInfo)
+    {
+        Uri uri = musicInfo.music;
+        if(uri == null)
             return;
-        if(_currentPlayer != null)
+
+    }
+    public void playNext(MusicInfo musicInfo) {
+        if(musicInfo == null || musicInfo.music == null)
+            return;
+        if(_current == musicInfo)
         {
-            _currentPlayer.stop();
-            _currentPlayer.reset();
+            if(_isPlaying)
+            {
+                _currentPlayer.pause();
+            }
+            else
+            {
+                _currentPlayer.start();
+            }
+            _isPlaying = !_isPlaying;
         }
-        musicInfo.current++;
-        if(musicInfo.current>=musicInfo.musics.size())
+        else
         {
-            musicInfo.current = 0;
+            if(_currentPlayer != null)
+            {
+                _currentPlayer.stop();
+                _currentPlayer.reset();
+            }
+            if (ContextCompat.checkSelfPermission(
+                    getContext(), Manifest.permission.INTERNET) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                _currentPlayer = MediaPlayer.create(_activity.getApplicationContext(), musicInfo.music);
+                _currentPlayer.start();
+                _isPlaying = true;
+                _current = musicInfo;
+            }
         }
-        if (ContextCompat.checkSelfPermission(
-                getContext(), Manifest.permission.INTERNET) ==
-                PackageManager.PERMISSION_GRANTED) {
-            _currentPlayer = MediaPlayer.create(_activity.getApplicationContext(), musicInfo.musics.get(musicInfo.current));
-            _currentPlayer.start();
-            _isPlaying = true;
-            handleButtonsVisibility();
-        }
+
 
     }
 

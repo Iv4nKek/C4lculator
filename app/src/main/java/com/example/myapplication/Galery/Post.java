@@ -3,6 +3,7 @@ package com.example.myapplication.Galery;
 import android.graphics.Bitmap;
 
 public class Post {
+    private boolean _collapsed = true;
     private Bitmap _image;
     private String _header;
     private String _description;
@@ -32,7 +33,8 @@ public class Post {
         this._description = _description;
     }
 
-    public Post(Bitmap _image, String _header, String _description, MusicInfo musicInfo) {
+    public Post(Bitmap _image, String _header, String _description, MusicInfo musicInfo, boolean collapsed) {
+        this._collapsed = collapsed;
         this._image = _image;
         this._header = _header;
         this._description = _description;
@@ -45,5 +47,13 @@ public class Post {
 
     public void set_musicInfo(MusicInfo _musicInfo) {
         this._musicInfo = _musicInfo;
+    }
+
+    public boolean is_collapsed() {
+        return _collapsed;
+    }
+
+    public void set_collapsed(boolean _collapsed) {
+        this._collapsed = _collapsed;
     }
 }
