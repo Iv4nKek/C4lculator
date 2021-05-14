@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class AddPost extends Fragment implements View.OnClickListener {
 
     private View _root;
     private MainActivity _activity;
-    private Bitmap _currentImage;
+    private Uri _currentImage;
     private Uri _music;
     private Bitmap _default;
     private ImageView _preview;
@@ -82,7 +83,25 @@ public class AddPost extends Fragment implements View.OnClickListener {
         _musicView = _root.findViewById(R.id.musicField);
         _activity = (MainActivity)getActivity();
        // _musics = new ArrayList<>();
-
+        _description.setOnKeyListener(new View.OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_ENTER:
+                            commit();
+                            hideKeyboard(_activity);
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
         BitmapDrawable drawable = (BitmapDrawable) _preview.getDrawable();
         _default = drawable.getBitmap();
         return _root;
@@ -164,7 +183,7 @@ public class AddPost extends Fragment implements View.OnClickListener {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                _currentImage = selectedImage;
+                _currentImage = imageUri;
                 ((ImageView)_root.findViewById(R.id.preview)).setImageBitmap(selectedImage);
 
             } catch (FileNotFoundException e) {

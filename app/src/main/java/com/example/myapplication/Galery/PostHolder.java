@@ -1,6 +1,8 @@
 package com.example.myapplication.Galery;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -17,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.Util;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private ImageView imageView;
@@ -98,10 +103,17 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
     public void setup(Post post)
     {
         this.post = post;
-        imageView.setImageBitmap(post.get_image());
+        InputStream imageStream = null;
+        try {
+            imageStream = _galery.getContext().getContentResolver().openInputStream(post.get_imageUri());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+        imageView.setImageBitmap(selectedImage);
         headerView.setText(post.get_header());
         discriptionView.setText(post.get_description());
-        imageView2.setImageBitmap(post.get_image());
+        imageView2.setImageBitmap(selectedImage);
         headerView2.setText(post.get_header());
         discriptionView2.setText(post.get_description());
         if(post.get_musicInfo() != null)
@@ -132,10 +144,8 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
     }
     @Override
     public void onClick(View v) {
-        System.out.println("1");
         if(v.getClass() == ConstraintLayout.class)
         {
-            System.out.println("2");
            if(_collapsed)
            {
                Extend();

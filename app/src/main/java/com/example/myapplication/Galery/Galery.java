@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -31,6 +32,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Files.JsonFileService;
+
 public class Galery extends Fragment implements View.OnClickListener {
 
 
@@ -50,7 +53,7 @@ public class Galery extends Fragment implements View.OnClickListener {
     private RecyclerView _recycleView;
     private ArrayList<Post> _posts = new ArrayList<>();
     private  PostAdapter _adapter;
-
+    private String filename = "ABOBA";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         System.out.println("Galery opned");
@@ -64,11 +67,13 @@ public class Galery extends Fragment implements View.OnClickListener {
         _fragmentView =_root.findViewById(R.id.fragment);
         _imageView = _fragmentView.findViewById(R.id.preview);
 
+        _posts = new ArrayList<>(new JsonFileService(filename, getContext()).readFromFile());
+        System.out.println("post loaded:" + _posts.size());
         _recycleView = _root.findViewById(R.id.RecycleView);
         generatePosts();
         _adapter= new PostAdapter(getContext(), _posts,this);
         _recycleView.setAdapter(_adapter);
-
+        _adapter.notifyDataSetChanged();
         _fragmentView.setVisibility(View.GONE);
         _default = _imageView.getDrawingCache(false);
         BitmapDrawable drawable = (BitmapDrawable) _imageView.getDrawable();
@@ -80,11 +85,11 @@ public class Galery extends Fragment implements View.OnClickListener {
     }
     private void generatePosts()
     {
-        if(_posts.size() == 2)
-            _posts.clear();
-        Post ricardoPost = new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ricardo),"Подарок на 8 марта","На 8 марта один из пацанов 824401 решил подарить девушкам очень необыкновеннй танец. Такого не было целоый год.", _current,true);
-        _posts.add(new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hitler),"Новый ученик в группе 420401","Ряды группы 824401 пополнились новым студентом. Он увлекается живописью и любит пму.", _current,false));
-        _posts.add(ricardoPost);
+       // if(_posts.size() == 2)
+        //    _posts.clear();
+      //  Post ricardoPost = new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ricardo),"Подарок на 8 марта","На 8 марта один из пацанов 824401 решил подарить девушкам очень необыкновеннй танец. Такого не было целоый год.", _current,true);
+      //  _posts.add(new Post(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hitler),"Новый ученик в группе 420401","Ряды группы 824401 пополнились новым студентом. Он увлекается живописью и любит пму.", _current,false));
+       // _posts.add(ricardoPost);
 
 
     }
@@ -232,6 +237,17 @@ public class Galery extends Fragment implements View.OnClickListener {
         }
 
 
+    }
+    public void onStop() {
+        updateFileStorage(getContext());
+        System.out.println("onStop");
+
+        super.onStop();
+    }
+
+    public void updateFileStorage(Context context) {
+        JsonFileService service = new JsonFileService(filename, context);
+        service.updateFile(_posts,getActivity());
     }
 
 }
